@@ -1,2 +1,13 @@
-# nitro-generator
-Discord Nitro Code Generator. Generates Classic and Boost Nitro Codes
+<h1 align="center">🌀 Discord Level Up Selfbot 🌀</h1>
+<h3 align="center">Generates Classic and Boost Nitro codes</h3>
+<h4 align="center">⭐ Don't forget to leave a star! ⭐</h4>
+
+
+
+## Usage:
+1. Open install.bat
+2. Open start.bat
+3. Done
+
+## Showcase:
+![Showcase](https://i.imgur.com/xjYxFRv.png)
