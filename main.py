@@ -29,7 +29,7 @@ def Init():
         exit()
 
     print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Generating {Fore.WHITE}{amount}{Fore.LIGHTBLACK_EX} codes!")
-    sleep(1.5)
+    sleep(1)
 
     fulla = amount
 
