@@ -1,9 +1,9 @@
 import os
-from colorama import Fore
 import random
 import string
 from time import sleep
 import requests
+from colorama import Fore
 
 
 os.system("cls")
