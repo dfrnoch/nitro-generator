@@ -1,9 +1,9 @@
 import os
+from colorama import Fore
 import random
 import string
 from time import sleep
 import requests
-from colorama import Fore
 
 
 os.system("cls")
@@ -63,6 +63,10 @@ p = open(f"proxies.txt", encoding="UTF-8")
 
 
 rproxy = p.read().split('\n')
+for i in rproxy:
+    if i == "" or i == " ":
+        index = rproxy.index(i)
+        del rproxy[index]
 
 if checker != "yes":
     while amount > 0:
@@ -81,7 +85,11 @@ if checker != "yes":
 else:
     while amount > 0:
         f = open(f"working-codes.txt","a", encoding="UTF-8")
-        if not rproxy[0]:
+        try:
+            if not rproxy[0]:
+                print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid!{Fore.WHITE}")
+                exit()
+        except:
             print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid!{Fore.WHITE}")
             exit()
         proxi = random.choice(rproxy)
@@ -104,7 +112,7 @@ else:
                 print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Invalid Code {Fore.WHITE}{code}")
             elif url.status_code == 429:
                 fulla = fulla - 1
-                print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} is ratelimited!")
+                print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} is ratelimited")
                 index = rproxy.index(proxi)
                 del rproxy[index]
             else:
@@ -121,4 +129,3 @@ else:
             print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Failed connecting to proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} | Removing from list!")
 
 print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Succefully generated {Fore.WHITE}{fulla} {Fore.LIGHTBLACK_EX}codes!{Fore.WHITE}")
-        
