@@ -1,9 +1,9 @@
 import os
-from colorama import Fore
-import random
-import string
 from time import sleep
 import requests
+import random
+import string
+from colorama import Fore
 
 
 os.system("cls")
@@ -22,6 +22,8 @@ else:
 
 
 checker = input(f"{Fore.WHITE}[ {Fore.YELLOW}> {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Enable Checker {Fore.WHITE}(yes or no){Fore.LIGHTBLACK_EX}: {Fore.WHITE}")
+print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}If no, every check will be on random proxy.")
+mult = input(f"{Fore.WHITE}[ {Fore.YELLOW}> {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Multiple checks for proxy {Fore.WHITE}(yes or no){Fore.LIGHTBLACK_EX}: {Fore.WHITE}")
 
 def scrape():
     scraped = 0
@@ -68,6 +70,11 @@ for i in rproxy:
         index = rproxy.index(i)
         del rproxy[index]
 
+def RandomProxy(int):
+    return rproxy[int]
+
+proxynum = len(rproxy)
+
 if checker != "yes":
     while amount > 0:
         amount = amount - 1
@@ -92,7 +99,10 @@ else:
         except:
             print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid!{Fore.WHITE}")
             exit()
-        proxi = random.choice(rproxy)
+        if mult == "yes":
+                    proxi = RandomProxy(0)
+        else:
+            proxi = random.choice(rproxy)
         proxies = {
             "https": proxi
         }
@@ -112,13 +122,19 @@ else:
                 print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Invalid Code {Fore.WHITE}{code}")
             elif url.status_code == 429:
                 fulla = fulla - 1
-                print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} is ratelimited")
+                if mult == "yes":
+                    proxynum = proxynum - 1
+                    print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} is ratelimited! | Switching proxy")
+                else:
+                    print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} is ratelimited!")
                 index = rproxy.index(proxi)
                 del rproxy[index]
             else:
                 fulla = fulla - 1
                 print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Invalid Error! | Status code {Fore.WHITE}{url.status_code}")
         except:
+            if mult == "yes":
+                    proxynum = proxynum - 1
             index = rproxy.index(proxi)
             del rproxy[index]
             pw = open(f"proxies.txt","w", encoding="UTF-8")
@@ -129,3 +145,4 @@ else:
             print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Failed connecting to proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} | Removing from list!")
 
 print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Succefully generated {Fore.WHITE}{fulla} {Fore.LIGHTBLACK_EX}codes!{Fore.WHITE}")
+       
