@@ -70,11 +70,6 @@ for i in rproxy:
         index = rproxy.index(i)
         del rproxy[index]
 
-def RandomProxy(int):
-    return rproxy[int]
-
-proxynum = len(rproxy)
-
 if checker != "yes":
     while amount > 0:
         amount = amount - 1
@@ -100,7 +95,7 @@ else:
             print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid!{Fore.WHITE}")
             exit()
         if mult == "yes":
-                    proxi = RandomProxy(0)
+            proxi = rproxy[0]
         else:
             proxi = random.choice(rproxy)
         proxies = {
@@ -123,7 +118,6 @@ else:
             elif url.status_code == 429:
                 fulla = fulla - 1
                 if mult == "yes":
-                    proxynum = proxynum - 1
                     print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} is ratelimited! | Switching proxy")
                 else:
                     print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} is ratelimited!")
@@ -133,8 +127,6 @@ else:
                 fulla = fulla - 1
                 print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Invalid Error! | Status code {Fore.WHITE}{url.status_code}")
         except:
-            if mult == "yes":
-                    proxynum = proxynum - 1
             index = rproxy.index(proxi)
             del rproxy[index]
             pw = open(f"proxies.txt","w", encoding="UTF-8")
@@ -145,4 +137,3 @@ else:
             print(f"{Fore.WHITE}[ {Fore.RED}- {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Failed connecting to proxy {Fore.WHITE}{proxi}{Fore.LIGHTBLACK_EX} | Removing from list!")
 
 print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Succefully generated {Fore.WHITE}{fulla} {Fore.LIGHTBLACK_EX}codes!{Fore.WHITE}")
-       
