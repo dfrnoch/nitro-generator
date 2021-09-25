@@ -8,8 +8,10 @@ from colorama import Fore
 
 os.system("cls")
 
-print(f"{Fore.WHITE}[ {Fore.CYAN}\u00A7 {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Discord Nitro Generator made by {Fore.WHITE}LnX{Fore.LIGHTBLACK_EX} | Licensed under {Fore.WHITE}MIT {Fore.LIGHTBLACK_EX}License")
-print(f"{Fore.WHITE}[ {Fore.CYAN}\u00A7 {Fore.WHITE}] {Fore.LIGHTBLACK_EX}You can follow me on Github: {Fore.WHITE}https://github.com/lnxcz")
+print(f"{Fore.WHITE}[ {Fore.CYAN}\u00A7 {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Discord Nitro Generator made by {Fore.WHITE}LnX{Fore.LIGHTBLACK_EX}, improved by {Fore.WHITE}DR34M-M4K3R{Fore.LIGHTBLACK_EX} | Licensed under {Fore.WHITE}MIT {Fore.LIGHTBLACK_EX}License")
+print(f"{Fore.WHITE}[ {Fore.CYAN}\u00A7 {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Original creator: {Fore.WHITE}https://github.com/lnxcz")
+print(f"{Fore.WHITE}[ {Fore.CYAN}\u00A7 {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Creator of this version : {Fore.WHITE}https://github.com/DR34M-M4K3R")
+print(f"{Fore.WHITE}[ {Fore.CYAN}\u00A7 {Fore.WHITE}] {Fore.LIGHTBLACK_EX}See what is new here: {Fore.WHITE}https://github.com/DR34M-M4K3R/nitro-generator/blob/master/README.md#whats-new")
 amount = int(input(f"\n{Fore.WHITE}[ {Fore.YELLOW}> {Fore.WHITE}] {Fore.LIGHTBLACK_EX}How much codes will be generated: {Fore.WHITE}"))
 print(f"\n{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Classic Nitro is 16chars and Boost Nitro is 24chars")
 nitro = input(f"{Fore.WHITE}[ {Fore.YELLOW}> {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Boost codes or Classic codes {Fore.WHITE}(boost or classic){Fore.LIGHTBLACK_EX}: {Fore.WHITE}")
@@ -61,25 +63,36 @@ if checker != "yes":
 
 fulla = amount
 f = open("codes.txt", "w+", encoding="UTF-8")
-try:
-    p = open("proxies.txt", encoding="UTF-8")
-except FileNotFoundError:
-    p = open("proxies.txt", "w+", encoding="UTF-8")
-    print(f"{Fore.WHITE}[{Fore.RED} ! {Fore.WHITE}]{Fore.LIGHTBLACK_EX} No proxies found in {Fore.WHITE}proxies.txt!{Fore.WHITE}")
-    raise SystemExit
 
 
 
-rproxy = p.read().split('\n')
-for i in rproxy:
-    if i == "" or i == " ":
-        index = rproxy.index(i)
-        del rproxy[index]
-p.close()
+def readproxies():
+    try:
+        p = open("proxies.txt", encoding="UTF-8")
+    except FileNotFoundError:
+        p = open("proxies.txt", "w+", encoding="UTF-8")
+        print(f"{Fore.WHITE}[{Fore.RED} ! {Fore.WHITE}]{Fore.LIGHTBLACK_EX} No proxies found in {Fore.WHITE}proxies.txt!{Fore.WHITE}")
+        raise SystemExit
+
+
+
+    rproxy = p.read().split('\n')
+    for i in rproxy:
+        if i == "" or i == " ":
+            index = rproxy.index(i)
+            del rproxy[index]
+    p.close()
+    
+    return rproxy
+    
+    
+rproxy=readproxies()
+
 
 if not rproxy:
-    print(f"{Fore.WHITE}[{Fore.RED} ! {Fore.WHITE}]{Fore.LIGHTBLACK_EX} No proxies found in {Fore.WHITE}proxies.txt!{Fore.WHITE}")
-    raise SystemExit
+        print(f"{Fore.WHITE}[{Fore.RED} ! {Fore.WHITE}]{Fore.LIGHTBLACK_EX} No proxies found in {Fore.WHITE}proxies.txt!{Fore.WHITE}")
+        raise SystemExit
+
 
 if checker != "yes":
     while amount > 0:
@@ -100,11 +113,24 @@ else:
         f = open(f"working-codes.txt","a", encoding="UTF-8")
         try:
             if not rproxy[0]:
-                print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid!{Fore.WHITE}")
-                exit()
+                print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid{Fore.WHITE}")
+                
+                #Here, when all the proxies are invalid, if the users choosed to auto-scrape proxy, the program is scraping new proxies.
+                if scrapep == "yes":
+                    print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Rescraping Proxies...{Fore.WHITE}")
+                    scrape()
+                    rproxy=readproxies()
+                else:
+                    exit()
+
         except:
-            print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid!{Fore.WHITE}")
-            exit()
+            print(f"{Fore.WHITE}[ {Fore.RED}! {Fore.WHITE}] {Fore.LIGHTBLACK_EX}All proxies are invalid{Fore.WHITE}")
+            if scrapep == "yes":
+                print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Rescraping Proxies...{Fore.WHITE}")
+                scrape()
+                rproxy=readproxies()
+            else:
+                exit()
         if mult == "yes":
             proxi = rproxy[0]
         else:
@@ -150,4 +176,4 @@ else:
 f.close()
 print(f"{Fore.WHITE}[ {Fore.YELLOW}? {Fore.WHITE}] {Fore.LIGHTBLACK_EX}Successfully generated {Fore.WHITE}{fulla} {Fore.LIGHTBLACK_EX}codes!{Fore.WHITE}")
 
-input()
+input() 
