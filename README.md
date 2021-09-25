@@ -74,8 +74,8 @@ $ python3 main.py
 ```
 
 ## How to use nitro-generator?
-#### 1- [Download](https://github.com/DR34M-M4K3R/nitro-generator#downloads)
-#### 2- [Run the program](https://github.com/DR34M-M4K3R/nitro-generator#downloads) 
+#### 1- [Download](https://github.com/DR34M-M4K3R/nitro-generator#download)
+#### 2- [Run the program](https://github.com/DR34M-M4K3R/nitro-generator#run-and-use-the-software) 
 #### 3- Answer questions displayed on the terminal.
 <br/>
 <br/>
