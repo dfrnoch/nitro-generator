@@ -30,7 +30,7 @@
 
 
 # Download
-[![hey](https://img.shields.io/badge/Download%20.py-181717?style=for-the-badge&color=black&logo=python)](https://github.com/DR34M-M4K3R/nitro-generator/releases/download/1.0/)
+[![hey](https://img.shields.io/badge/Download%20.py-181717?style=for-the-badge&color=black&logo=python)](https://github.com/DR34M-M4K3R/nitro-generator/archive/refs/heads/master.zip)
 
 
 # About the program
