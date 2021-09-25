@@ -19,9 +19,9 @@
 
 
 ## Table of content:<br/>
-### 1. [Downloads](https://github.com/DR34M-M4K3R/nitro-generator#downloads) <br/>
+### 1. [Downloads](https://github.com/DR34M-M4K3R/nitro-generator#download) <br/>
 ### 2. [About the program](https://github.com/DR34M-M4K3R/nitro-generator#about-the-program) <br/>
-### 3. [Requierments](https://github.com/DR34M-M4K3R/nitro-generator#run-the-software)
+### 3. [Requierments](https://github.com/DR34M-M4K3R/nitro-generator#requirements)
 ### 4. [How to run and use the software?](https://github.com/DR34M-M4K3R/nitro-generator#run-and-use-the-software)
 ### 6. [Special cases and internal errors](https://github.com/DR34M-M4K3R/nitro-generator#special-cases-and-internal-errors)
 
