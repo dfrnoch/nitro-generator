@@ -58,6 +58,7 @@ def scrape():
     proxies = []
     for proxy in r.text.split('\n'):
         proxy = proxy.strip()
+        proxy = 'https://' + proxy
         if proxy:
             proxies.append(proxy)
     for p in proxies:
