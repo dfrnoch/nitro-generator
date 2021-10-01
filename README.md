@@ -27,7 +27,7 @@
 
 
 # Download
-[![hey](https://img.shields.io/badge/Download%20.py-181717?style=for-the-badge&color=black&logo=python)](https://github.com/DR34M-M4K3R/nitro-generator/archive/refs/heads/master.zip)
+[![hey](https://img.shields.io/badge/Download%20.py-181717?style=for-the-badge&color=black&logo=python)](https://github.com/lnxcz/nitro-generator/archive/refs/heads/master.zip)
 
 
 # About the program
@@ -71,8 +71,8 @@ $ python3 main.py
 ```
 
 ## How to use nitro-generator?
-#### 1- [Download](https://github.com/DR34M-M4K3R/nitro-generator#download)
-#### 2- [Run the program](https://github.com/DR34M-M4K3R/nitro-generator#run-and-use-the-software) 
+#### 1- [Download](https://github.com/lnxcz/nitro-generator#download)
+#### 2- [Run the program](https://github.com/lnxcz/nitro-generator#run-and-use-the-software) 
 #### 3- Answer questions displayed on the terminal.
 <br/>
 <br/>
@@ -87,7 +87,7 @@ error:
 ```
 ModuleNotFoundError: No module named ...
 ```
-Solution: Install dependencies (see [here](https://github.com/DR34M-M4K3R/nitro-generator#downloads))
+Solution: Install dependencies (see [here](https://github.com/lnxcz/nitro-generator#downloads))
 <br/>
 
 ### Problem 2 - A very long error displayed
