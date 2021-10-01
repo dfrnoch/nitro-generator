@@ -9,9 +9,6 @@
     <a href="https://www.python.org/">
       <img src="http://ForTheBadge.com/images/badges/made-with-python.svg" />
     </a>
-    <a href="https://discord.gg/FPhHhBG25d">
-      <img src="https://img.shields.io/badge/Join%20me%20on%20discord-181717?style=for-the-badge&logo=discord" />
-    </a>
   </p>
 </p>
 
@@ -19,12 +16,12 @@
 
 
 ## Table of content:<br/>
-### 1. [Downloads](https://github.com/DR34M-M4K3R/nitro-generator#download) <br/>
-### 2. [About the program](https://github.com/DR34M-M4K3R/nitro-generator#about-the-program) <br/>
-### 2. [What's new?](https://github.com/DR34M-M4K3R/nitro-generator/blob/master/README.md#whats-new) <br/>
-### 3. [Requierments](https://github.com/DR34M-M4K3R/nitro-generator#requirements)
-### 4. [How to run and use the software?](https://github.com/DR34M-M4K3R/nitro-generator#run-and-use-the-software)
-### 6. [Special cases and internal errors](https://github.com/DR34M-M4K3R/nitro-generator#special-cases-and-internal-errors)
+### 1. [Downloads](https://github.com/lnxcz/nitro-generator#download) <br/>
+### 2. [About the program](https://github.com/lnxcz/nitro-generator#about-the-program) <br/>
+### 2. [What's new?](https://github.com/lnxcz/nitro-generator/blob/master/README.md#whats-new) <br/>
+### 3. [Requierments](https://github.com/lnxcz/nitro-generator#requirements)
+### 4. [How to run and use the software?](https://github.com/lnxcz/nitro-generator#run-and-use-the-software)
+### 6. [Special cases and internal errors](https://github.com/lnxcz/nitro-generator#special-cases-and-internal-errors)
 
 <br/><br/>
 
@@ -100,11 +97,10 @@ error:
 Solution: Check your connection.
 <br/><br/>
 
-<a href="https://www.buymeacoffee.com/DR34MM4K3R" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
 
 
 
 ## Showcase:
-![Showcase](https://i.imgur.com/9hYb7Sp.png)
-readme made with ❤ by [DR34M-M4K3R](https://github.com/DR34M-M4K3R)
+![Showcase](https://i.imgur.com/9hYb7Sp.png) <br>
+readme made with ❤ by [DR34M-M4K3R](https://github.com/DR34M-M4K3R) <br>
+Check his [BuymeACoffee](https://www.buymeacoffee.com/DR34MM4K3R) and [discord server](https://discord.gg/FPhHhBG25d)
