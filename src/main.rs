@@ -2,11 +2,11 @@ use rand::distributions::Alphanumeric;
 use rand::Rng;
 use std::thread;
 
-mod proxy_scrape;
+mod proxy;
 
 fn main() {
     let codes = generate_codes(10);
-    let proxies = proxy_scrape::scrape().unwrap();
+    let proxies = proxy::scrape().unwrap();
 
     println!("{:?}", proxies);
     println!("{:?}", codes);

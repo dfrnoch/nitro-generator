@@ -11,8 +11,8 @@ pub fn scrape() -> Result<Vec<String>, reqwest::Error> {
     .text()?;
     let mut proxies = vec![];
 
-    for proxy in r.split('\n') {
-        let proxy = proxy.trim();
+    for mut proxy in r.split('\n') {
+        proxy = proxy.trim();
         if !proxy.is_empty() {
             let proxy = format!("https://{}", proxy);
             proxies.push(proxy);
@@ -21,9 +21,10 @@ pub fn scrape() -> Result<Vec<String>, reqwest::Error> {
 
     for p in &proxies {
         scraped = scraped + 1;
-        f.write_all(p.as_bytes()).expect("Unable to write data");
-        f.write_all(b"\n").expect("Unable to write data");
+        f.write(format!("{}\n", p).as_bytes())
+            .expect("Unable to write data");
     }
+
     println!("[?] Scraped {} proxies.", scraped);
     return Ok(proxies);
 }
