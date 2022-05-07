@@ -25,9 +25,6 @@ jobs:
         with:
           command: build
 
-      - name: Create env file
-        run: mv .env.example .env
-
       - name: 🔎 Test
         uses: actions-rs/cargo@v1
         with:
