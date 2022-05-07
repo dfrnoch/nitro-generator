@@ -2,10 +2,11 @@ use rand::distributions::Alphanumeric;
 use rand::Rng;
 use std::thread;
 
+mod cli;
 mod proxy;
 
 fn main() {
-    let codes = generate_codes(10);
+    let codes = generate_codes(cli::input::input("How many codes do you want to generate?"));
     let proxies = proxy::scrape().unwrap();
 
     println!("{:?}", proxies);
