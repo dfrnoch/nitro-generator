@@ -1,25 +1,40 @@
-name: Build
+name: Continuous Integration
 
-on:
-  push:
-    branches: [main]
+on: [push, pull_request]
 
 jobs:
-  build:
-    name: Build
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Compile
-        id: compile
-        uses: rust-build/rust-build.action@v1.3.2
+      - uses: actions/checkout@v2
+      - name: ⚡ Cache
+        uses: actions/cache@v2
         with:
-          RUSTTARGET: x86_64-unknown-linux-musl
-          UPLOAD_MODE: none
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Binary
           path: |
-            ${{ steps.compile.outputs.BUILT_ARCHIVE }}
-            ${{ steps.compile.outputs.BUILT_CHECKSUM }}
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: 🔨 Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
+      - name: Create env file
+        run: mv .env.example .env
+
+      - name: 🔎 Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+
+      - name: ⚙ Integration test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --features "integration_tests"
