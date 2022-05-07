@@ -1,5 +1,6 @@
 use rand::distributions::Alphanumeric;
 use rand::Rng;
+use std::sync::{Arc, Mutex};
 use std::thread;
 
 mod cli;
@@ -9,18 +10,36 @@ fn main() {
     let codes = generate_codes(cli::input::input("How many codes do you want to generate?"));
     let threads: usize = cli::input::input("How many threads do you want to use?");
 
-    let proxies = proxy::scrape().unwrap();
-    let codes = parse_codes(codes, threads);
+    let proxy_swap = Arc::new(Mutex::new(0));
+    let proxies = Arc::new(proxy::scrape().unwrap());
+    let codes = Arc::new(parse_codes(codes, threads));
 
-    println!("{:?}", codes);
+    let mut handles = vec![];
 
     for i in 0..threads {
-        let code = codes[i].clone();
+        let split_codes = codes[i].clone();
+        let proxy_swap = Arc::clone(&proxy_swap);
+        let proxies = Arc::clone(&proxies);
 
-        thread::spawn(move || {
-            println!("{:?}", code);
+        let handle = thread::spawn(move || {
+            let mut proxy_swap_lock = *proxy_swap.lock().unwrap();
+            for code in split_codes {
+                if proxy_swap_lock > proxies.len() - 1 {
+                    proxy_swap_lock = 0;
+                }
+
+                let proxy = &proxies[proxy_swap_lock];
+                proxy_swap_lock += 1;
+                println!("THREAD {}: [{}] {}", i + 1, proxy, code);
+            }
         });
+        handles.push(handle);
     }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    println!("{:?}", proxy_swap.lock().unwrap());
 }
 
 fn parse_codes(codes: Vec<String>, threads: usize) -> Vec<Vec<String>> {
