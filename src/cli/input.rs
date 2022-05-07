@@ -4,7 +4,7 @@ use std::{
     str::FromStr,
 };
 
-pub fn input<T: std::str::FromStr>(message: &str) -> T
+pub fn input<T: FromStr>(message: &str) -> T
 where
     <T as FromStr>::Err: Debug,
 {
