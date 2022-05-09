@@ -4,11 +4,13 @@ use std::{
     str::FromStr,
 };
 
+use super::output::{display_message, MessageType};
+
 pub fn input<T: FromStr>(message: &str) -> T
 where
     <T as FromStr>::Err: Debug,
 {
-    print!("[?] {}: ", message);
+    display_message(MessageType::Info, message);
     io::stdout().flush().unwrap();
 
     let mut input = String::new();

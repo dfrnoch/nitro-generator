@@ -30,7 +30,7 @@ fn main() {
 
                 let proxy = &proxies[proxy_swap_lock];
                 proxy_swap_lock += 1;
-                println!("THREAD {}: [{}] {}", i + 1, proxy, code);
+                println!("WORKER {}: [{}] {}", i + 1, proxy, code);
             }
         });
         handles.push(handle);
