@@ -30,6 +30,20 @@ fn main() {
 
                 let proxy = &proxies[proxy_swap_lock];
                 proxy_swap_lock += 1;
+
+                let r = proxy::check(proxy, &code);
+                if r.is_ok() {
+                    cli::output::display_message(
+                        cli::output::MessageType::Success,
+                        &format!("{}", code),
+                    );
+                } else {
+                    cli::output::display_message(
+                        cli::output::MessageType::Error,
+                        &format!("{}", code),
+                    );
+                }
+
                 println!("WORKER {}: [{}] {}", i + 1, proxy, code);
             }
         });
