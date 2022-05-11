@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::{fs::File, time::Duration};
 use std::io::Write;
 
 use async_recursion::async_recursion;
@@ -44,6 +44,7 @@ pub async fn scrape() -> Result<Vec<String>, reqwest::Error> {
 pub async fn check(proxy: &str, code: &str) -> Result<reqwest::Response, reqwest::Error> {
     let client = reqwest::Client::builder()
         .proxy(reqwest::Proxy::https(proxy)?)
+        .timeout(Duration::from_secs(5))
         .build()?;
 
     println!("requesting");
