@@ -1,4 +1,3 @@
-
 pub enum MessageType {
     Info,
     Warning,
@@ -6,7 +5,7 @@ pub enum MessageType {
     Success,
 }
 
-pub fn display_message(message_type: MessageType, message: &str) -> () {
+pub fn display_message(message_type: MessageType, message: &str) {
     match message_type {
         MessageType::Success => println!("[+] {}", message),
         MessageType::Error => println!("[-] {}", message),

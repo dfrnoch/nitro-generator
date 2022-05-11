@@ -12,7 +12,6 @@ where
 {
     display_message(MessageType::Info, message);
     io::stdout().flush().unwrap();
-
     let mut input = String::new();
     io::stdin().read_line(&mut input).unwrap();
     input.trim().parse::<T>().expect("Invalid input")
