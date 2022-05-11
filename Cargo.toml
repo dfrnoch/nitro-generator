@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 rand = "0.8.5"
 reqwest = { version = "0.11", features = ["blocking"] }
+tokio = { version = "1.18.2", features = ["full"] }
+async-recursion = "1.0.0"

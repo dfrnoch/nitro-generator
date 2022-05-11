@@ -1,19 +1,20 @@
 use rand::distributions::Alphanumeric;
 use rand::Rng;
 use std::sync::{Arc, Mutex};
-use std::thread;
+
+use tokio::task;
 
 mod cli;
 mod proxy;
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let codes = generate_codes(cli::input::input("How many codes do you want to generate?"));
     let threads: usize = cli::input::input("How many threads do you want to use?");
 
     let proxy_swap = Arc::new(Mutex::new(0));
-    let proxies = Arc::new(proxy::scrape().unwrap());
+    let proxies = Arc::new(proxy::scrape().await.unwrap());
     let codes = Arc::new(parse_codes(codes, threads));
-
     let mut handles = vec![];
 
     for i in 0..threads {
@@ -21,7 +22,7 @@ fn main() {
         let proxy_swap = Arc::clone(&proxy_swap);
         let proxies = Arc::clone(&proxies);
 
-        let handle = thread::spawn(move || {
+        let join = task::spawn(async move {
             let mut proxy_swap_lock = *proxy_swap.lock().unwrap();
             for code in split_codes {
                 if proxy_swap_lock > proxies.len() - 1 {
@@ -31,7 +32,7 @@ fn main() {
                 let proxy = &proxies[proxy_swap_lock];
                 proxy_swap_lock += 1;
 
-                let r = proxy::check(proxy, &code);
+                let r = proxy::check(proxy, &code).await;
                 if r.is_ok() {
                     cli::output::display_message(
                         cli::output::MessageType::Success,
@@ -47,12 +48,12 @@ fn main() {
                 println!("WORKER {}: [{}] {}", i + 1, proxy, code);
             }
         });
-        handles.push(handle);
+        handles.push(join);
+    }
+    for join in handles {
+        join.await.unwrap();
     }
 
-    for handle in handles {
-        handle.join().unwrap();
-    }
     println!("{:?}", proxy_swap.lock().unwrap());
 }
 

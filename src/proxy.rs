@@ -1,21 +1,25 @@
 use std::fs::File;
 use std::io::Write;
 
+use async_recursion::async_recursion;
+
 use crate::cli::output::{display_message, MessageType};
 
-pub fn scrape() -> Result<Vec<String>, reqwest::Error> {
+#[async_recursion]
+pub async fn scrape() -> Result<Vec<String>, reqwest::Error> {
     let mut scraped = 0;
     let mut f = File::create("proxies.txt").expect("Unable to create file");
-    let r = reqwest::blocking::get(
+    let r = reqwest::get(
         "https://api.proxyscrape.com/?request=displayproxies&proxytype=http&timeout=1500&ssl=yes",
-    );
-    if Result::is_err(&r) {
+    )
+    .await?;
+    if r.status().is_server_error() {
         display_message(MessageType::Warning, "Failed to fetch proxies, retrying...");
-        return scrape();
+        return scrape().await;
     }
 
     let mut proxies = vec![];
-    let r = r.unwrap().text()?;
+    let r = r.text().await?;
 
     for proxy in r.trim().lines() {
         if !proxy.is_empty() {
@@ -37,12 +41,15 @@ pub fn scrape() -> Result<Vec<String>, reqwest::Error> {
     return Ok(proxies);
 }
 
-pub fn check(proxy: &str, code: &str) -> Result<(), reqwest::Error> {
+pub async fn check(proxy: &str, code: &str) -> Result<reqwest::Response, reqwest::Error> {
     let client = reqwest::Client::builder()
         .proxy(reqwest::Proxy::https(proxy)?)
         .build()?;
 
-    let mut r = client.get(format!("https://discordapp.com/reedem/{}", code).as_str());
+    println!("requesting");
 
-    return Ok(());
+    let r = client.get(format!("https://discordapp.com/reedem/{}", code).as_str());
+    let r = r.send().await?;
+
+    return Ok(r);
 }
