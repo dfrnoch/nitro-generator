@@ -8,12 +8,16 @@ pub fn scrape() -> Result<Vec<String>, reqwest::Error> {
     let mut f = File::create("proxies.txt").expect("Unable to create file");
     let r = reqwest::blocking::get(
         "https://api.proxyscrape.com/?request=displayproxies&proxytype=http&timeout=1500&ssl=yes",
-    )?
-    .text()?;
-    let mut proxies = vec![];
+    );
+    if Result::is_err(&r) {
+        display_message(MessageType::Warning, "Failed to fetch proxies, retrying...");
+        return scrape();
+    }
 
-    for mut proxy in r.split('\n') {
-        proxy = proxy.trim();
+    let mut proxies = vec![];
+    let r = r.unwrap().text()?;
+
+    for proxy in r.trim().lines() {
         if !proxy.is_empty() {
             let proxy = format!("https://{}", proxy);
             proxies.push(proxy);
