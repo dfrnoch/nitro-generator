@@ -57,10 +57,10 @@ Improved by [DR34M-M4K3R](https://github.com/DR34M-M4K3R)
 # Run and use the software
 
 #### Install dependencies (optional)
-Open a terminal, go to the requirements directory and type:
+Open a terminal, go to the nitro-generator directory and type:
 
 ```
-$ pip3 install -r requierments.txt
+$ pip3 install -r requirements.txt
 ```
 
 <br/><br/>
