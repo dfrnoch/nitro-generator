@@ -36,16 +36,16 @@ async fn main() {
                 if r.is_ok() {
                     cli::output::display_message(
                         cli::output::MessageType::Success,
-                        &format!("{}", code),
+                        &format!("Valid Code: {}", code),
                     );
                 } else {
                     cli::output::display_message(
                         cli::output::MessageType::Error,
-                        &format!("{}", code),
+                        &format!("Invalid Code: {}", code),
                     );
                 }
 
-                println!("WORKER {}: [{}] {}", i + 1, proxy, code);
+                // println!("WORKER {}: [{}] {}", i + 1, proxy, code);
             }
         });
         handles.push(join);
@@ -54,7 +54,7 @@ async fn main() {
         join.await.unwrap();
     }
 
-    println!("{:?}", proxy_swap.lock().unwrap());
+    // println!("{:?}", proxy_swap.lock().unwrap());
 }
 
 fn parse_codes(codes: Vec<String>, threads: usize) -> Vec<Vec<String>> {

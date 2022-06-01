@@ -51,6 +51,6 @@ pub async fn check(proxy: &str, code: &str) -> Result<reqwest::Response, reqwest
 
     let r = client.get(format!("https://discordapp.com/reedem/{}", code).as_str());
     let r = r.send().await?;
-
-    return Ok(r);
+    
+    Ok(r)
 }
