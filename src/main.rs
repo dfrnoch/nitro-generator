@@ -1,7 +1,7 @@
 use rand::distributions::Alphanumeric;
 use rand::Rng;
 use std::sync::{Arc, Mutex};
-
+use cli::output::{display_message, MessageType};
 use tokio::task;
 
 mod cli;
@@ -33,15 +33,20 @@ async fn main() {
                 proxy_swap_lock += 1;
 
                 let r = proxy::check(proxy, &code).await;
+                let status = match &r {
+                    Ok(r) => r.status(),
+                    Err(_) => reqwest::StatusCode::INTERNAL_SERVER_ERROR,
+                };
+
                 if r.is_ok() {
-                    cli::output::display_message(
-                        cli::output::MessageType::Success,
+                    display_message(
+                        MessageType::Success,
                         &format!("Valid Code: {}", code),
                     );
                 } else {
-                    cli::output::display_message(
-                        cli::output::MessageType::Error,
-                        &format!("Invalid Code: {}", code),
+                    display_message(
+                        MessageType::Error,
+                        &format!("Invalid Code: {} {}", code, status),
                     );
                 }
 
