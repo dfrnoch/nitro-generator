@@ -1,9 +1,11 @@
-use std::{fs::File, time::Duration};
 use std::io::Write;
+use std::{fs::File, time::Duration};
 
 use async_recursion::async_recursion;
 
 use crate::cli::output::{display_message, MessageType};
+
+static mut BLACKLIST: Vec<String> = Vec::new();
 
 #[async_recursion]
 pub async fn scrape() -> Result<Vec<String>, reqwest::Error> {
@@ -23,7 +25,7 @@ pub async fn scrape() -> Result<Vec<String>, reqwest::Error> {
 
     for proxy in r.trim().lines() {
         if !proxy.is_empty() {
-            let proxy = format!("https://{}", proxy);
+            let proxy = format!("http://{}", proxy);
             proxies.push(proxy);
         }
     }
@@ -41,7 +43,21 @@ pub async fn scrape() -> Result<Vec<String>, reqwest::Error> {
     return Ok(proxies);
 }
 
-pub async fn check(proxy: &str, code: &str) -> Result<reqwest::Response, reqwest::Error> {
+pub async fn check(proxy: &str) -> Result<(), &'static str> {
+    // TODO: Make this safe
+    if unsafe { BLACKLIST.contains(&proxy.to_string()) } {
+        return Err("Error: Proxy is blacklisted");
+    }
+    Ok(())
+}
+
+pub async fn blacklist(proxy: &str) {
+    unsafe {
+        BLACKLIST.push(proxy.to_string());
+    }
+}
+
+pub async fn request(proxy: &str, code: &str) -> reqwest::Result<reqwest::Response> {
     let client = reqwest::Client::builder()
         .proxy(reqwest::Proxy::https(proxy)?)
         .timeout(Duration::from_secs(5))
@@ -51,6 +67,6 @@ pub async fn check(proxy: &str, code: &str) -> Result<reqwest::Response, reqwest
 
     let r = client.get(format!("https://discordapp.com/reedem/{}", code).as_str());
     let r = r.send().await?;
-    
+
     Ok(r)
 }

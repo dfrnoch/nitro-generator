@@ -1,7 +1,8 @@
+use cli::output::{display_message, MessageType};
 use rand::distributions::Alphanumeric;
 use rand::Rng;
-use std::sync::{Arc, Mutex};
-use cli::output::{display_message, MessageType};
+use std::sync::Arc;
+use tokio::sync::Mutex;
 use tokio::task;
 
 mod cli;
@@ -23,7 +24,7 @@ async fn main() {
         let proxies = Arc::clone(&proxies);
 
         let join = task::spawn(async move {
-            let mut proxy_swap_lock = *proxy_swap.lock().unwrap();
+            let mut proxy_swap_lock = *proxy_swap.lock().await;
             for code in split_codes {
                 if proxy_swap_lock > proxies.len() - 1 {
                     proxy_swap_lock = 0;
@@ -32,25 +33,36 @@ async fn main() {
                 let proxy = &proxies[proxy_swap_lock];
                 proxy_swap_lock += 1;
 
-                let r = proxy::check(proxy, &code).await;
+                let blacklist_check = proxy::check(proxy).await;
+                if blacklist_check.is_err() {
+                    continue;
+                }
+
+                let r = proxy::request(proxy, &code).await;
+
                 let status = match &r {
                     Ok(r) => r.status(),
                     Err(_) => reqwest::StatusCode::INTERNAL_SERVER_ERROR,
                 };
 
-                if r.is_ok() {
-                    display_message(
-                        MessageType::Success,
-                        &format!("Valid Code: {}", code),
-                    );
-                } else {
-                    display_message(
-                        MessageType::Error,
-                        &format!("Invalid Code: {} {}", code, status),
-                    );
+                match status {
+                    reqwest::StatusCode::OK => {
+                        display_message(MessageType::Success, &format!("{} is valid", code));
+                    }
+                    reqwest::StatusCode::NOT_FOUND => {
+                        display_message(MessageType::Error, &format!("{} is invalid", code));
+                    }
+                    reqwest::StatusCode::TOO_MANY_REQUESTS => {
+                        display_message(MessageType::Warning, &format!("{} is ratelimited", code));
+                    }
+                    _ => {
+                        display_message(
+                            MessageType::Warning,
+                            &format!("Proxy {} is invalid, removing from list", proxy),
+                        );
+                        proxy::blacklist(proxy).await;
+                    }
                 }
-
-                // println!("WORKER {}: [{}] {}", i + 1, proxy, code);
             }
         });
         handles.push(join);
