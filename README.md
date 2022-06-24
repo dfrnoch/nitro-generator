@@ -1,3 +1,5 @@
+⚠️ Im no longer maintaining this script and the rust version, but maybe ill rewrite my [nitro sniper](https://github.com/lnxcz/discord-sniper) beacuse theres actually somewhat big chance to snipe nitro if used properly. I kinda want to make it good so it will definitely take a while to create.
+
 # Automatic Proxy scraper and Proxy-rotating Nitro Generator.
 <p align="center">
     <a href="https://mit-license.org/">
@@ -10,11 +12,6 @@
 </p>
 
 ## This program is just a showcase of discord vulnerabilities, I am not responsible of any damage or illegal activity made with this software, assume being a script kiddie and take responsabilities of your damages.
-
-Hey! was a long time without changes, so since im now learning Rust, I decided to rewrite this script in it. This app will be still nothing too useful since chance of generating working code is close to zero but it'll surely be alot faster than python cuz multithreading and ofc rust is systems language so even without optimalization it would be like 20x faster.
-
-You can look at my developement progress on [dev brach](https://github.com/lnxcz/nitro-generator/tree/dev)
-
 
 ## Table of content:<br/>
 ### 1. [Downloads](https://github.com/lnxcz/nitro-generator#download) <br/>
