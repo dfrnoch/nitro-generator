@@ -32,6 +32,7 @@
 
 Program made by [lnxcz](https://github.com/lnxcz) </p>
 Improved by [DR34M-M4K3R](https://github.com/DR34M-M4K3R)
+Improved a second time by [ledges](https://github.com/ledges)
 
 <br/>
 <br/>
@@ -39,8 +40,8 @@ Improved by [DR34M-M4K3R](https://github.com/DR34M-M4K3R)
 
 # What's new?
 
-#### -When the user selects "auto-scrape proxy" option, when the proxies are invalids, the program re-scrapes the proxies, and continues the checking.
-#### -Improved the Readme :wow:
+* Massive code cleanup
+* Easily Selectable Options w/ good looking UI.
 
 <br/>
 <br/>
@@ -80,25 +81,22 @@ $ python3 main.py
 <br/><br/>
 
 ### Problem 1 - No module named ...
-error:
 
 ```
 ModuleNotFoundError: No module named ...
 ```
-Solution: Install dependencies (see [here](https://github.com/lnxcz/nitro-generator#downloads))
+Install dependencies (see [here](https://github.com/lnxcz/nitro-generator#downloads))
 <br/>
 
 ### Problem 2 - A very long error displayed
-error:
 ![Screenshot_20210925_180856](https://user-images.githubusercontent.com/67145585/134778134-eaa9e531-15e7-4140-afae-16a8dd33cce7.png)
 
-Solution: Check your connection.
+The problem that is being shown here is ratelimit, you're proxies / IP is most likely being ratelimited by the service that is being scraped from.
 <br/><br/>
 
 
 
 
 ## Showcase:
-![Showcase](https://i.imgur.com/9hYb7Sp.png) <br>
-readme made with ❤ by [DR34M-M4K3R](https://github.com/DR34M-M4K3R) <br>
-Check his [BuymeACoffee](https://www.buymeacoffee.com/DR34MM4K3R) and [discord server](https://discord.gg/FPhHhBG25d)
+![image](https://user-images.githubusercontent.com/120739758/219971050-235a728c-3422-4ca3-a355-43e7c5e3bcfe.png) <br>
+
