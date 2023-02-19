@@ -98,5 +98,6 @@ The problem that is being shown here is ratelimit, you're proxies / IP is most l
 
 
 ## Showcase:
-![image](https://user-images.githubusercontent.com/120739758/219971050-235a728c-3422-4ca3-a355-43e7c5e3bcfe.png) <br>
+![image](https://user-images.githubusercontent.com/120739758/219971344-631c978f-cb7e-44d0-aa45-56b727ed2487.png)
+<br>
 
