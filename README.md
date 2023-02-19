@@ -17,7 +17,7 @@
 ### 1. [Downloads](https://github.com/lnxcz/nitro-generator#download) <br/>
 ### 2. [About the program](https://github.com/lnxcz/nitro-generator#about-the-program) <br/>
 ### 2. [What's new?](https://github.com/lnxcz/nitro-generator/blob/master/README.md#whats-new) <br/>
-### 3. [Requierments](https://github.com/lnxcz/nitro-generator#requirements)
+### 3. [Requirements](https://github.com/lnxcz/nitro-generator#requirements)
 ### 4. [How to run and use the software?](https://github.com/lnxcz/nitro-generator#run-and-use-the-software)
 ### 6. [Special cases and internal errors](https://github.com/lnxcz/nitro-generator#special-cases-and-internal-errors)
 
