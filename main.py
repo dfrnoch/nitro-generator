@@ -13,14 +13,6 @@ class SapphireGen:
         this.codes = codes
         this.proxies = prox
         this.session = requests.Session()
-        this.code = {
-            "boost": "".join(
-                [random.choice(string.ascii_letters + string.digits) for i in range(24)]
-            ),
-            "classic": "".join(
-                [random.choice(string.ascii_letters + string.digits) for i in range(16)]
-            ),
-        }
         this.prox_api = (
             "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt"
         )
@@ -51,7 +43,21 @@ class SapphireGen:
                     }
                 else:
                     prox = None
-                code = this.code[this.type]
+
+                if this.type == "boost":
+                    code = "".join(
+                        [
+                            random.choice(string.ascii_letters + string.digits)
+                            for i in range(24)
+                        ]
+                    )
+                else:
+                    code = "".join(
+                        [
+                            random.choice(string.ascii_letters + string.digits)
+                            for i in range(16)
+                        ]
+                    )
                 req = this.session.get(
                     f"https://discordapp.com/api/v6/entitlements/gift-codes/{code}",
                     proxies=prox,
