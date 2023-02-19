@@ -1,6 +1,6 @@
 ⚠️ Im no longer maintaining this script and the rust version, but maybe ill rewrite my [nitro sniper](https://github.com/lnxcz/discord-sniper) beacuse theres actually somewhat big chance to snipe nitro if used properly. I kinda want to make it good so it will definitely take a while to create.
 
-# Automatic Proxy scraper and Proxy-rotating Nitro Generator.
+# A fast nitro gen w/ proxy-scraper built-in.
 <p align="center">
     <a href="https://mit-license.org/">
       <img src= "https://user-images.githubusercontent.com/67145585/134778810-3ed67ef3-8699-42b9-80f3-6a2618d128b3.jpg"/>
