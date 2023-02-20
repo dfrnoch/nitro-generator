@@ -27,7 +27,7 @@ class SapphireGen:
                 open("./data/proxies.txt", "a").write(f"{proxy}\n")
 
     def generate(this, scrape=None):
-        if scrape == True:
+        if scrape == "True":
             this.__proxies__()
         else:
             pass
@@ -35,9 +35,9 @@ class SapphireGen:
         os.system("clear")
         for _ in range(int(this.codes)):
             try:
-                if this.proxies == True:
+                if this.proxies == "True":
                     prox = {
-                        "https": random.choice(
+                        "http": random.choice(
                             open("./data/proxies.txt", "r").read().splitlines()
                         )
                     }
@@ -59,7 +59,7 @@ class SapphireGen:
                         ]
                     )
                 req = this.session.get(
-                    f"https://discordapp.com/api/v6/entitlements/gift-codes/{code}",
+                    f"https://discordapp.com/api/entitlements/gift-codes/{code}",
                     proxies=prox,
                     timeout=10,
                 ).status_code
@@ -96,7 +96,13 @@ if __name__ == "__main__":
         prox = input(
             f"{Fore.LIGHTMAGENTA_EX}[{strftime('%H:%M', localtime())}] Proxies (True, False): "
         )
+        if prox == "True":
+            scrape_proxy = input(
+                f"{Fore.LIGHTMAGENTA_EX}[{strftime('%H:%M', localtime())}] Scrape proxies (True, False): "
+            )
+        else:
+            scrape_proxy = False
         codes = input(
             f"{Fore.LIGHTMAGENTA_EX}[{strftime('%H:%M', localtime())}] Number of codes: "
         )
-        SapphireGen(code_type, prox, codes).generate(scrape=False)
+        SapphireGen(code_type, prox, codes).generate(scrape=scrape_proxy)
