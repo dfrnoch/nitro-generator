@@ -43,7 +43,7 @@ Improved a second time by [ledges](https://github.com/ledges)
 * Massive code cleanup
 * Easily Selectable Options w/ good looking UI.
 
-`To change whether or not to scrape proxies, go to the bottom of the code and at ".generate(scrape=False") just change it to True.`
+`To change whether or not to scrape proxies, input True or False when it says "Scrape Proxies"`
 
 <br/>
 <br/>
