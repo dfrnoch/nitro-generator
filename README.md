@@ -43,7 +43,6 @@ Improved a second time by [ledges](https://github.com/ledges)
 * Massive code cleanup
 * Easily Selectable Options w/ good looking UI.
 
-`To change whether or not to scrape proxies, input True or False when it says "Scrape Proxies"`
 
 <br/>
 <br/>
